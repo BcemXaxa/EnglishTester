@@ -1,6 +1,6 @@
 package ru.vsu.cs.daa.engtester.painters;
 
-import ru.vsu.cs.daa.engtester.utils.UIPreferences;
+import ru.vsu.cs.daa.engtester.experimental.settings.ColorScheme;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -25,12 +25,12 @@ public class BdTlPainter extends BgFgPainter {
 	}
 
 	@Override
-	public void paint(UIPreferences preferences) {
-		super.paint(preferences);
+	public void paint(ColorScheme scheme) {
+		super.paint(scheme);
 		((JComponent) component).setBorder(
 				recolorBorder(((JComponent) component).getBorder(),
-							  preferences.textColorSolutions.get(bdScheme),
-							  preferences.textColorSolutions.get(tlScheme)));
+							  scheme.textColorSolutions.get(bdScheme),
+							  scheme.textColorSolutions.get(tlScheme)));
 	}
 
 	protected Border recolorBorder(Border border, Color bdColor, Color tlColor) {

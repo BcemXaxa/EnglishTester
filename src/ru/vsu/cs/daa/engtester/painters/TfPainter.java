@@ -1,6 +1,6 @@
 package ru.vsu.cs.daa.engtester.painters;
 
-import ru.vsu.cs.daa.engtester.utils.UIPreferences;
+import ru.vsu.cs.daa.engtester.experimental.settings.ColorScheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +11,8 @@ public class TfPainter extends BgFgPainter {
 	}
 
 	@Override
-	public void paint(UIPreferences preferences) {
-		super.paint(preferences);
-		((JTextField)component).setCaretColor(preferences.textColorSolutions.get(fgScheme));
+	public void paint(ColorScheme scheme) {
+		super.paint(scheme);
+		((JTextField)component).setCaretColor(scheme.textColorSolutions.get(fgScheme));
 	}
 }

@@ -3,59 +3,51 @@ package ru.vsu.cs.daa.engtester.remade;
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
 import java.io.File;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
 
 public class ComboBoxModelFiles implements ComboBoxModel<String> {
-	private final String directory;
-	private final String extension;
-	public ArrayList<String> files;
+	public File[] files;
+	public String placeholder = "None";
 
-	public ComboBoxModelFiles(String directory, String extension) {
-		this.directory = directory;
-		this.extension = extension;
-		refresh();
+	public ComboBoxModelFiles() {
+	}
+	public ComboBoxModelFiles(String placeholder) {
+		this.placeholder = placeholder;
 	}
 
-	public void refresh() {
-		files = new ArrayList<>();
-		File currentDirectory = Path.of(directory).toAbsolutePath().toFile();
-		File[] fileList = currentDirectory.listFiles();
-		if (fileList != null) {
-			Pattern pattern = Pattern.compile("(.+)(\\..+)");
-			Matcher matcher;
-			for (File file : fileList) {
-				if (file.isFile()) {
-					matcher = pattern.matcher(file.getName());
-					if (matcher.matches() && matcher.group(2).equals(extension)) {
-						files.add(matcher.group(1));
-					}
-				}
-			}
-		}
+	public void refresh(File[] files) {
+		this.files = files;
 	}
 
-	private String selectedItem = null;
+	private File selectedItem = null;
+
 	@Override
 	public void setSelectedItem(Object anItem) {
-		selectedItem = anItem.toString();
+		for (File file : files) {
+			if (file.getName().equals(anItem.toString())) {
+				selectedItem = file;
+				return;
+			}
+		}
+		selectedItem = null;
 	}
 
 	@Override
 	public Object getSelectedItem() {
+		return selectedItem == null ? placeholder : selectedItem.getName();
+	}
+	public File getSelectedFile() {
 		return selectedItem;
 	}
 
 	@Override
 	public int getSize() {
-		return files.size();
+		return files.length;
 	}
 
 	@Override
 	public String getElementAt(int index) {
-		return files.get(index);
+		return files[index].getName();
 	}
 
 	@Override

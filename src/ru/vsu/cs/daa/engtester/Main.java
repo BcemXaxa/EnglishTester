@@ -1,6 +1,5 @@
 package ru.vsu.cs.daa.engtester;
 
-
 import java.util.Locale;
 
 public class Main {

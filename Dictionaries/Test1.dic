@@ -1,9 +1,9 @@
-w: word1
+> word1
 def1
-w: word2
+> word2
 def2.1
 def2.2
-w: word3
+> word3
 def3.1
 def3.2
 def3.3
